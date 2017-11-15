@@ -1,4 +1,5 @@
 import React,{Component}  from 'react';
+import { Form,Select,Button,Input,Layout,Radio,Checkbox,TimePicker,DatePicker,DateRangePicker,Switch } from "element-react";
 
 class About extends Component{
     render(){

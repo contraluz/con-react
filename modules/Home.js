@@ -215,20 +215,7 @@ class Home extends Component {
                         </Card>
                     </Layout.Col>
                 </Layout.Row>
-                <footer>
-                    <p className="pull-right"><a href="#">Back to top</a></p>
-                    <p style={{textAlign:'center'}}>Copyright ©2016 POPO.CN 潮流新闻网 All Rights Reserved 版权所有</p>
-                </footer>
-
-
-
-
-
-
-
-
-
-
+                
 
             </div>
 

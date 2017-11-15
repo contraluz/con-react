@@ -8,44 +8,11 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href='./index.css' rel="stylesheet"/>
     <title>react project</title>
-    <style>
-        body{
-            font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-        }
-    </style>
 </head>
 <body>
     <div id="app"></div>
     <script src="bundle.js"></script>
     <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/babel">
-        var $ = (function(){
-           var ajax=function(url,callback){
-                var xhr=new XMLHttpRequest();
-                xhr.open("GET",url,true);
-                xhr.send("");
-                xhr.onreadystatechange=function(){
-                  if(xhr.readyState==4&&xhr.status==200){
-                        callback(JSON.parse(xhr.responseText));
-                  }
-                }
-           }
-           return {
-             http:ajax    
-            }
-    
-        })();
-    
-        //1.数据如何去获取  http ajax
-        //2.数据获取以后 如何绑定到页面中 
-        //3.first  ------jsx
-         
-       
-    
-      
-      
-        
-    </script>
 </body>
 </html>

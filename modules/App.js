@@ -22,6 +22,7 @@ class App extends Component{
                           <ul className="nav navbar-nav">
                           <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
                           <li><NavLink to="/news">News</NavLink></li>
+                          <li><NavLink to="/newsdetail">NewsDetail</NavLink></li>
                             <li><NavLink to="/about">About</NavLink></li>
                             <li><NavLink to="/counter">Counter</NavLink></li>
                             <li><NavLink to="/carts">Carts</NavLink></li>
@@ -46,6 +47,7 @@ class App extends Component{
                 <div className="container" role="main">
                      {this.props.children}
                 </div>
+                
             </div>
         )
     }

@@ -13,6 +13,7 @@ import News from './modules/News'
 import App from './modules/App'
 import About from './modules/About'
 import Home from './modules/Home'
+import NewsDetail from './modules/NewsDetail'
 import CounterContext from './modules/Counter'
 import CartsContext from './modules/Carts'
 
@@ -32,6 +33,7 @@ ReactDOM.render(
                         <Route path="/counter" component={CounterContext}/>
                         <Route path="/carts" component={CartsContext}/>
                         <Route path="/news" component={News}/>
+                        <Route path="/newsdetail" component={NewsDetail}/>
                         
                     </Route>
                 </Router>

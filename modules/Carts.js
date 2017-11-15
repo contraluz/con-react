@@ -15,7 +15,7 @@ class Carts extends Component{
         }
         return (
             <div>
-                  <div className='mag50'></div>
+                <div className='mag50'></div>
                 {output}
             </div>
         )
