@@ -3,10 +3,12 @@ import { Form,Select,Button,Input,Layout,Radio,Checkbox,TimePicker,DatePicker,Da
 
 class About extends Component{
     render(){
+        
         return (
             <div>
-                  <div className='mag50'></div>
+                <div className='mag50'></div>
                 About
+                
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import React,{Component}  from 'react';
 import NavLink from './NavLink';
+import Footer from './Footer';
 
 class App extends Component{
     render(){
@@ -23,7 +24,7 @@ class App extends Component{
                           <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
                           <li><NavLink to="/news">News</NavLink></li>
                           <li><NavLink to="/newsdetail">NewsDetail</NavLink></li>
-                            <li><NavLink to="/about">About</NavLink></li>
+                            <li><NavLink to="/product">Product</NavLink></li>
                             <li><NavLink to="/counter">Counter</NavLink></li>
                             <li><NavLink to="/carts">Carts</NavLink></li>
                             <li className="dropdown">
@@ -47,7 +48,7 @@ class App extends Component{
                 <div className="container" role="main">
                      {this.props.children}
                 </div>
-                
+                <Footer/>
             </div>
         )
     }

@@ -34,7 +34,7 @@ class News extends Component {
           }
         },
         {
-          label: "评论",
+          label: "最新评论",
           prop: "words",
           width: 160,
           render: function (data) {

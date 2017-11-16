@@ -14,7 +14,7 @@ class Counter extends Component{
         this.props.fetchList(params)
     }
 
-    addCart(e){
+    addCartkk(e){
         const idx = e.target.getAttribute('data-idx');
         const addToCartProduct = this.props.lists.subjects[idx];
         this.props.addToCart(addToCartProduct)
@@ -42,7 +42,7 @@ class Counter extends Component{
 
         for(let i=0;i<lists.subjects.length;i++){
             output.push(<li key={i} style={{overflow:'hidden',margin:'.2rem'}}>
-                <a className="btn btn-primary" role="button" href="javascript:void(0)" data-idx={i}  onClick={ (e)=> {this.addCart(e)} }>加入购物车</a>
+                <a className="btn btn-primary" role="button" href="javascript:void(0)" data-idx={i}  onClick={ (e)=> {this.addCartkk(e)} }>加入购物车</a>
                 &nbsp;
                 &nbsp;
                 &nbsp;

@@ -9,6 +9,7 @@ class Carts extends Component{
 
         var output = [];
         for(let i =0;i<cartsList.length;i++){
+            console.log(cartsList[i].title+"123")
             output.push(
                 <li key={i}>名称：{cartsList[i].title} 数量：{cartsList[i].quantity}</li>
             )
@@ -16,7 +17,7 @@ class Carts extends Component{
         return (
             <div>
                 <div className='mag50'></div>
-                {output}
+                <ul>{output}</ul>
             </div>
         )
     }
