@@ -314,3 +314,24 @@ h6, .h6 {
   float:left;
   overflow: hidden
 }
+.goods_{
+  box-sizing: border-box;
+  padding-top: 2rem
+}
+.goods_:hover{
+  box-shadow: 2px 2px 2px 0px #ccc
+}
+ul{
+  list-style: none
+}
+.el-card{
+  opacity: .8
+}
+.el-card:hover{
+  opacity: 1
+  
+}
+.newsList::selection{
+  background: deeppink;
+  color:white
+}

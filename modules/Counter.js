@@ -1,87 +1,115 @@
-import React,{Component}  from 'react';
-import {connect} from 'react-redux';
-import {increase,decrease,fetchList,addToCart} from '../actions/counter'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Button, Input, Layout, Notification, Rate } from "element-react";
+import {  fetchList, addToCart } from '../actions/counter'
 
 
-class Counter extends Component{
-    componentWillMount(){
+class Counter extends Component {
+    componentWillMount() {
         this.props.fetchList();
     }
 
-    changePage(e){
+    changePage(e) {
         const page = e.target.getAttribute('data-page');
-        const params = {page: parseInt(page)}
+        const params = { page: parseInt(page) }
+        console.log(params)
         this.props.fetchList(params)
     }
 
-    addCartkk(e){
-        const idx = e.target.getAttribute('data-idx');
-        const addToCartProduct = this.props.lists.subjects[idx];
-        this.props.addToCart(addToCartProduct)
-    }
+    addCartkk(e) {
 
-    render(){
-        const {value,value1,lists,carts,increase,decrease,fetchList,addToCart} = this.props;
+        // console.log(this)
+
+        const idx = e.target.getAttribute('data-idx');
+        // console.log(idx)
+        const addToCartProduct = this.props.lists[idx];
+        this.props.addToCart(addToCartProduct)
+        this.open()
+    }
+    open() {
+        Notification({
+            title: '操作提示',
+            message: '添加成功，请到购物车查看你的商品哦!'
+        });
+
+    }
+    render() {
+        const { value, value1, lists, carts, fetchList, addToCart } = this.props;
         var output = [];
-        if(!lists.subjects){
+        // console.log(lists)
+        if (!lists) {
             return <div>
-                  <div className='mag50'></div>
+                <div className='mag50'></div>
                 数据请求中...
-                </div>
+                    </div>
         }
 
         var output = [];
         var outputPages = [];
         var pages = 1;
-        pages = Math.ceil(lists.total/20);
-        for(let i=1; i<=pages;i++){
+        pages = Math.ceil(lists.length / 20);
+        console.log(lists)
+        for (let i = 0, len = lists.length; i < len; i++) {
+            output.push(<li className="goods_" key={i} style={{ overflow: 'hidden', margin: '.2rem' }}>
+                <div className="f_left">
+                    <img width='300' height='256' src={lists[i].img}
+                        style={{ overflow: 'hidden', margin: '3rem', marginTop: "0", border: "1px solid #ddd", borderRadius: ".5rem" }} />
+                </div>
+                <div className="f_left">
+                    <p style={{ fontSize: '20px', color: " #000", fontWeight: "600" }}>{lists[i].name}</p>
+                    <p>惊喜价 ￥ {lists[i].price}</p>
+                    <p style={{ color: " #343434", fontWeight: "400" }}> {lists[i].content}</p>
+                    <div className="block" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+                        <span className="wrapper">
+                            <Rate colors={['#99A9BF', '#F7BA2A', '#FF9900']} />
+                        </span>
+                    </div>
+                    <a type="btn btn-primary"
+                        data-idx={i}
+                        href='javascript:void(0)'
+                        style={{
+                            color: "#5a5a5a", display: "block", width: "100px", textAlign: "center",
+                            border: "1px solid #ccc", borderRadius: "5px", lineHeight: '36px'
+                        }}
+                        onClick={(e) => { this.addCartkk(e) }}>加入购物车</a>
+
+                </div>
+            </li>)
+        }
+        for (let i = 1; i <= pages; i++) {
             outputPages.push(
-                <li><a href="javascript:void(0)" onClick={ (e)=>this.changePage(e) } data-page={i} key={i}>{i}</a></li>
+                <li><a href="javascript:void(0)" onClick={(e) => this.changePage(e)} data-page={i} key={i}>{i}</a></li>
             )
         }
-
-        for(let i=0;i<lists.subjects.length;i++){
-            output.push(<li key={i} style={{overflow:'hidden',margin:'.2rem'}}>
-                <a className="btn btn-primary" role="button" href="javascript:void(0)" data-idx={i}  onClick={ (e)=> {this.addCartkk(e)} }>加入购物车</a>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                {lists.subjects[i].title}
-               
-                </li>)
-        }
-
 
         return (
             <div>
                 <div className='mag50'></div>
-                <span>value：{value}</span>
-                <br/>
-                <span>value1：{value1}</span>
-                <br/>
+                <ul>
+                    {output}
+                </ul>
+                <br />
                 <nav aria-label="...">
                     <ul className="pagination">
                         {outputPages}
                     </ul>
                 </nav>
-                <br/>
-                {output}
-                <br/>
-                <button onClick={increase}>计数+1</button>
-                <button onClick={decrease}>计数-1</button>
+
+
             </div>
         )
     }
 }
 
-const getValue = (state)=>{
+const getValue = (state) => {
     return {
         value: state.reducer.count,
         value1: state.reducer.count1,
-        lists: state.reducer.lists
+        lists: state.reducer.lists,
+        carts: state.reducer.carts
     }
 }
-const CounterContext = connect(getValue,{increase,decrease,fetchList,addToCart})(Counter)
+const CounterContext = connect(getValue, { fetchList, addToCart })(Counter)
 
 
 module.exports = CounterContext;

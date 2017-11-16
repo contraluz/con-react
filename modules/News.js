@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Icon, Tag ,Input,Pagination} from 'element-react';
+import { Button, Table, Icon, Tag, Input, Pagination } from 'element-react';
 import axios from 'axios';
 
 class News extends Component {
@@ -9,74 +9,21 @@ class News extends Component {
     this.state = {
       filter: [],
       posts: [],
-      columns: [
-        {
-          type: 'index'
-        },
-        {
-          label: "日期",
-          prop: "date",
-          width: 140,
-          render: function (data) {
-            return (
-              <span>
-                <Icon name="time" />
-                <span style={{ marginLeft: '10px' }}>{data.date}</span>
-              </span>)
-          }
-        },
-        {
-          label: "姓名",
-          prop: "name",
-          // width: 160,
-          render: function (data) {
-            return <span>{data.name}</span>
-          }
-        },
-        {
-          label: "最新评论",
-          prop: "words",
-          width: 160,
-          render: function (data) {
-            return <span>{data.words}</span>
-          }
-        },
-        {
-          label: "评论数",
-          prop: "comment",
-          width: 160,
-          render: function (data) {
-            return <span>{data.comment}</span>
-          }
-        },
-        {
-          label: "操作",
-          prop: "address",
-          render: function (row, column, index) {
-            return (
-              <span>
-                <Button plain={true} type="info" size="small">编辑</Button>
-                <Button type="danger" size="small" >删除</Button>
-              </span>
-            )
-          }
-        }
-      ]
+
+
+
     }
   }
-  deleteRow(index) {
-    const { data } = this.state;
-    data.splice(index, 1);
-    this.setState({
-      data: [...data]
-    })
+  changePage() {
+
   }
+
   componentDidMount() {
-    axios.post(`http://localhost:3000/news/list`, this.filter)
+    axios.post(`http://localhost:3000/cate/list`, this.filter)
       .then(res => {
-        
+
         const posts = res.data;
-        console.log(posts)
+        // console.log(res)
         this.setState({ posts });
       });
   }
@@ -84,26 +31,61 @@ class News extends Component {
     const { getData } = this.props
     // console.log(this.state.posts)
 
+    let outputNews = [<li key={"most"} className="f_left"><Button>全部新闻</Button></li>];
+    let newsMain = [];
+    let newArr = []
+    console.log(this.state.posts)
+    if (this.state.posts) {
+      // console.log(this.state.posts.rows.length)
+      for (let i = 0, len = this.state.posts.length; i < len; i++) {
+        outputNews.push(
+          <li key={i} className="f_left">
+            <Button>{this.state.posts[i].title}</Button>
+          </li>
+        )
+
+        if (this.state.posts[i].children) {
+
+          for (let j = 0, len = this.state.posts[i].children.length; j < len; j++) {
+            console.log(123)
+            newArr = newArr.concat(this.state.posts[i].children)
+          }
+        }
+      }
+      
+
+      console.log(newArr)
+    }
+    for (let i = 0, len = newArr.length; i < len; i++) {
+      console.log(1)
+      newsMain.push(
+        <li key={i}>
+          <a href="javascript:void(0)"
+            className="newsList"
+            onClick={(e) => this.changePage(e)}
+            style={{ color: "#333", background: "url(https://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/news/img/top_bg_f32315c.png) no-repeat left -275px" }}
+            data-page={i} key={i}>
+            &nbsp;
+          &nbsp;
+          {newArr[i].title} <span className="newsList" style={{ color: "#ccc", float: "right" }}>{newArr[i].date.slice(0, 10)}</span>
+          </a>
+        </li>
+      )
+    }
+
     return (
       <div>
-        <div className='mag50'></div>
+        <div style={{ height: '71px' }}></div>
 
         <div>
-           
-          <h3>News Management System </h3>
-          
-           
-          <Table
-            style={{ width: '100%' }}
-            columns={this.state.columns}
-            data={this.state.posts.rows}
-            border={true}
 
-            highlightCurrentRow={true}
-            onCurrentChange={item => { console.log(item) }}
-          />
+          <h3>News Lists </h3>
+
+          <ul style={{ overflow: " hidden" }}>{outputNews}</ul>
+
+          <ul>{newsMain}</ul>
           {/* <Input placeholder="请输入内容" key='search' append={<Button type="primary" icon="search">搜索</Button>} />  */}
-          <Pagination layout="total, prev, pager, next" total={this.state.posts.total} pageSize={this.state.posts.limit}/>
+
         </div>
 
       </div>

@@ -10,20 +10,18 @@ var initialState = {
 
 function reducer(state=initialState,action){
     switch(action.type){
-        case "INCREASE":
-            // return {count: state.count +1}
-            return Object.assign({},state,{count: state.count + 1});
-        case "DECREASE":
-            return Object.assign({},state,{count1: state.count1 - 1});
-            // return {count1: state.count1 - 1}
+       
         case "GETLISTS":
             return Object.assign({},state,{lists: action.data});
         case "ADDTOCART":
             // 找这个产品有没有加入过，如果没有加入过，数量为1
             // 如果有加入过，数量再 +1
-            var pos = _.findIndex(state.carts, { 'id':action.data.id });
+            console.log(state)
+            var pos = _.findIndex(state.carts, { '_id':action.data._id });
+
             if(pos === -1){
                 action.data.quantity = 1;
+                console.log("chongzhi")
             }else{
                 action.data.quantity = state.carts[pos].quantity +1;
             }

@@ -11,7 +11,7 @@ import DevTools from './store/DevTools';
 
 import News from './modules/News'
 import App from './modules/App'
-import Product from './modules/Product'
+
 import Home from './modules/Home'
 import NewsDetail from './modules/NewsDetail'
 import CounterContext from './modules/Counter'
@@ -29,7 +29,7 @@ ReactDOM.render(
                 <Router history={history}>
                     <Route path="/" component={App}>
                         <IndexRoute component={Home}/>
-                        <Route path="/product" component={Product}/>
+                       
                         <Route path="/counter" component={CounterContext}/>
                         <Route path="/carts" component={CartsContext}/>
                         <Route path="/news" component={News}/>

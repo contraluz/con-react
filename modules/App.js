@@ -17,14 +17,14 @@ class App extends Component{
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                           </button>
-                          <a className="navbar-brand" href="#">浪潮新闻网</a>
+                          <a className="navbar-brand" href="#">langchao.net</a>
                         </div>
                         <div id="navbar" className="navbar-collapse collapse">
                           <ul className="nav navbar-nav">
                           <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
                           <li><NavLink to="/news">News</NavLink></li>
                           <li><NavLink to="/newsdetail">NewsDetail</NavLink></li>
-                            <li><NavLink to="/product">Product</NavLink></li>
+                          
                             <li><NavLink to="/counter">Counter</NavLink></li>
                             <li><NavLink to="/carts">Carts</NavLink></li>
                             <li className="dropdown">
