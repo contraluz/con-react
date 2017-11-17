@@ -78,7 +78,7 @@ class Counter extends Component {
         }
         for (let i = 1; i <= pages; i++) {
             outputPages.push(
-                <li><a href="javascript:void(0)" onClick={(e) => this.changePage(e)} data-page={i} key={i}>{i}</a></li>
+                <li key={i+"page"}><a href="javascript:void(0)" onClick={(e) => this.changePage(e)} data-page={i} key={i}>{i}</a></li>
             )
         }
 

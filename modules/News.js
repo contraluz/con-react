@@ -9,60 +9,70 @@ class News extends Component {
     this.state = {
       filter: [],
       posts: [],
-
-
+      changePage:[],
+      oldPost:[]
 
     }
   }
-  changePage() {
-
+  changeBack(e){
+    this.setState({
+      posts:this.state.oldPost
+      
+    })
+  }
+  changePage(e) {
+    this.setState({
+      oldPost:this.state.posts
+      
+    })
+    for (let i = 0, len = this.state.posts.length; i < len; i++){
+      if(this.state.posts[i].title===e.target.innerHTML){
+        this.setState({
+          posts:[].concat(this.state.posts[i])
+          
+        })
+      }
+    }
+    
+   
   }
 
   componentDidMount() {
     axios.post(`http://localhost:3000/cate/list`, this.filter)
       .then(res => {
-
         const posts = res.data;
-        // console.log(res)
         this.setState({ posts });
       });
   }
   render() {
     const { getData } = this.props
-    // console.log(this.state.posts)
-
-    let outputNews = [<li key={"most"} className="f_left"><Button>全部新闻</Button></li>];
+    let outputNews = [<li key={"most"} className="f_left" onClick={(e)=>{this.changeBack(e)}}><Button>全部新闻</Button></li>];
     let newsMain = [];
     let newArr = []
-    console.log(this.state.posts)
+    
     if (this.state.posts) {
-      // console.log(this.state.posts.rows.length)
       for (let i = 0, len = this.state.posts.length; i < len; i++) {
         outputNews.push(
-          <li key={i} className="f_left">
-            <Button>{this.state.posts[i].title}</Button>
+          <li key={i+"a"} className="f_left"  onClick={(e) => this.changePage(e)}>
+            <Button key={i+"b"}>{this.state.posts[i].title}</Button>
           </li>
         )
 
         if (this.state.posts[i].children) {
 
           for (let j = 0, len = this.state.posts[i].children.length; j < len; j++) {
-            console.log(123)
-            newArr = newArr.concat(this.state.posts[i].children)
+            newArr = newArr.concat(this.state.posts[i].children[j])
+            
           }
         }
       }
-      
-
-      console.log(newArr)
     }
     for (let i = 0, len = newArr.length; i < len; i++) {
-      console.log(1)
       newsMain.push(
-        <li key={i}>
+        <li key={i+"c"}>
           <a href="javascript:void(0)"
             className="newsList"
-            onClick={(e) => this.changePage(e)}
+            key={i+"d"}
             style={{ color: "#333", background: "url(https://gss0.bdstatic.com/5foIcy0a2gI2n2jgoY3K/static/fisp_static/news/img/top_bg_f32315c.png) no-repeat left -275px" }}
             data-page={i} key={i}>
             &nbsp;
@@ -76,16 +86,14 @@ class News extends Component {
     return (
       <div>
         <div style={{ height: '71px' }}></div>
-
         <div>
-
           <h3>News Lists </h3>
-
+         
           <ul style={{ overflow: " hidden" }}>{outputNews}</ul>
 
           <ul>{newsMain}</ul>
-          {/* <Input placeholder="请输入内容" key='search' append={<Button type="primary" icon="search">搜索</Button>} />  */}
-
+          <Pagination layout="total, prev, pager, next" total={newArr.length} pageSize={10}/>
+          
         </div>
 
       </div>

@@ -16,12 +16,12 @@ function reducer(state=initialState,action){
         case "ADDTOCART":
             // 找这个产品有没有加入过，如果没有加入过，数量为1
             // 如果有加入过，数量再 +1
-            console.log(state)
+            
             var pos = _.findIndex(state.carts, { '_id':action.data._id });
-
+            console.log(action.data._id)
             if(pos === -1){
                 action.data.quantity = 1;
-                console.log("chongzhi")
+                console.log("重置")
             }else{
                 action.data.quantity = state.carts[pos].quantity +1;
             }
